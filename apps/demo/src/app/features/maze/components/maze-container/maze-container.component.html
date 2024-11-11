@@ -1,0 +1,48 @@
+
+<div class="maze-container">
+  <!-- Error Message -->
+  <div *ngIf="error$ | async as error" class="error-message">
+    {{ error }}
+  </div>
+<!-- Loading Indicator -->
+<div *ngIf="loading$ | async" class="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Maze Upload Section -->
+<valant-app-maze-upload
+  [loading]="loading$ | async"
+  (fileSelected)="onFileSelected($event)">
+</valant-app-maze-upload>
+
+<!-- Available Mazes Grid -->
+<ng-container *ngIf="mazes$ | async as mazes">
+  <valant-app-maze-grid
+    [mazes]="mazes"
+    [selectedMazeId]="(currentGame$ | async)?.mazeId"
+    [loading]="loading$ | async"
+    (mazeSelected)="onMazeSelect($event)">
+  </valant-app-maze-grid>
+</ng-container>
+
+<!-- Active Game Display -->
+<ng-container *ngIf="currentGame$ | async as currentGame">
+  <valant-app-maze-display
+    [gameState]="currentGame"
+    [maze]="mazes$ | async | mazeById:currentGame.mazeId">
+  </valant-app-maze-display>
+
+  <!-- Game Controls -->
+  <valant-app-maze-controls
+    [availableMoves]="currentGame.availableMoves"
+    [loading]="loading$ | async"
+    (moveSelected)="onMove($event)">
+  </valant-app-maze-controls>
+
+  <!-- Game Complete Message -->
+  <div *ngIf="currentGame.isComplete" class="success-message">
+    Congratulations! You've completed the maze! 🎉
+    <button class="reset-button" (click)="onReset()">Play Again</button>
+  </div>
+</ng-container>
+</div>

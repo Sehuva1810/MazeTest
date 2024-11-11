@@ -1,0 +1,39 @@
+<section
+    class="upload-section"
+    [class.drag-over]="isDragging"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+>
+    <h2>Upload New Maze</h2>
+    <div class="upload-area" role="region" aria-label="File upload area">
+        <input
+            #fileInput
+            type="file"
+            accept=".txt"
+            [disabled]="loading"
+            (change)="onFileInputChange($event)"
+            class="file-input visually-hidden"
+            aria-label="Choose maze file"
+        />
+        <div class="upload-prompt">
+            <button
+                type="button"
+                [disabled]="loading"
+                (click)="fileInput.click()"
+                class="upload-button"
+                aria-controls="fileInput"
+            >
+                Choose File
+            </button>
+            <p>
+                <span class="sr-only"
+                    >Or drag and drop a maze file to upload</span
+                >
+            </p>
+            <small class="upload-constraints">
+                Accepted file types: .txt Maximum file size: 1MB
+            </small>
+        </div>
+    </div>
+</section>

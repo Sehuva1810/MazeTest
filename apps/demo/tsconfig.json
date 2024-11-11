@@ -1,16 +1,30 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@core/*": ["../../../../core/models/*"],
+            "@shared/*": ["src/app/shared/*"],
+            "@modules/*": ["src/app/modules/*"]
+        }
     },
-    {
-      "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
-    }
-  ]
+    "extends": "../../tsconfig.base.json",
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.spec.json"
+        },
+        {
+            "path": "./tsconfig.editor.json"
+        }
+    ],
+    "angularCompilerOptions": {
+    "enableIvy": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "strictTemplates": true
+  }
 }
