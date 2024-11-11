@@ -1,0 +1,61 @@
+<section class="controls-container" role="group" aria-label="Maze navigation controls">
+  <div class="controls-grid">
+    <!-- Up Button -->
+    <button
+      class="control-btn up-btn"
+      [class.available]="!isDisabled(controls[0].direction)"
+      [disabled]="isDisabled(controls[0].direction)"
+      (click)="onMove(controls[0].direction)"
+      [attr.aria-label]="controls[0].label">
+      {{ controls[0].symbol }}
+    </button>
+
+    <!-- Middle Row -->
+    <div class="middle-row">
+      <button
+        class="control-btn left-btn"
+        [class.available]="!isDisabled(controls[3].direction)"
+        [disabled]="isDisabled(controls[3].direction)"
+        (click)="onMove(controls[3].direction)"
+        [attr.aria-label]="controls[3].label">
+        {{ controls[3].symbol }}
+      </button>
+
+      <div class="center-dot"></div>
+
+      <button
+        class="control-btn right-btn"
+        [class.available]="!isDisabled(controls[2].direction)"
+        [disabled]="isDisabled(controls[2].direction)"
+        (click)="onMove(controls[2].direction)"
+        [attr.aria-label]="controls[2].label">
+        {{ controls[1].symbol }}
+      </button>
+    </div>
+
+    <!-- Down Button -->
+    <button
+      class="control-btn down-btn"
+      [class.available]="!isDisabled(controls[1].direction)"
+      [disabled]="isDisabled(controls[1].direction)"
+      (click)="onMove(controls[1].direction)"
+      [attr.aria-label]="controls[1].label">
+      {{ controls[2].symbol }}
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading"
+       class="loading-indicator"
+       role="status"
+       aria-live="polite">
+    Moving...
+  </div>
+
+  <!-- Screen Reader Status -->
+  <div class="sr-only"
+       role="status"
+       aria-live="polite">
+    {{ getAvailableMovesText() }}
+  </div>
+</section>

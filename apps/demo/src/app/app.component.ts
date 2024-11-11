@@ -1,31 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggingService } from './logging/logging.service';
-import { StuffService } from './stuff/stuff.service';
 
 @Component({
-  selector: 'valant-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less'],
+    selector: 'valant-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  public title = 'Valant demo';
-  public data: string[];
+    public title = 'Maze demo';
+    public data: string[];
 
-  constructor(private logger: LoggingService, private stuffService: StuffService) {}
+    constructor(private logger: LoggingService) {}
 
-  ngOnInit() {
-    this.logger.log('Welcome to the AppComponent');
-    this.getStuff();
-  }
+    ngOnInit() {
+        this.logger.log('Welcome to the AppComponent');
+    }
 
-  private getStuff(): void {
-    this.stuffService.getStuff().subscribe({
-      next: (response: string[]) => {
-        this.data = response;
-      },
-      error: (error) => {
-        this.logger.error('Error getting stuff: ', error);
-      },
-    });
-  }
 }

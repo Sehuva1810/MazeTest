@@ -1,0 +1,27 @@
+<section class="maze-grid">
+  <h2>Available Mazes</h2>
+  <div
+    class="grid-container"
+    role="list"
+    aria-label="Available mazes">
+    <div
+      *ngFor="let maze of mazes; trackBy: trackByMazeId"
+      class="maze-card"
+      [class.selected]="maze.id === selectedMazeId"
+      [class.disabled]="loading"
+      role="listitem">
+      <h3>{{ maze.name }}</h3>
+      <div class="maze-preview" aria-hidden="true">
+        <pre>{{ getPreview(maze.grid) }}</pre>
+      </div>
+      <button
+        [disabled]="loading"
+        class="select-button"
+        (click)="onMazeSelect(maze.id)"
+        [attr.aria-label]="'Select maze ' + maze.name"
+        [attr.aria-pressed]="maze.id === selectedMazeId">
+        {{ maze.id === selectedMazeId ? 'Selected' : 'Start Game' }}
+      </button>
+    </div>
+  </div>
+</section>

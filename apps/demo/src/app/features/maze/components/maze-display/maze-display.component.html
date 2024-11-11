@@ -1,0 +1,29 @@
+<section class="maze-display">
+  <header>
+    <h2 class="maze-title">Current Maze: {{ maze?.name }}</h2>
+    <div class="position-info" aria-live="polite">
+      Position: ({{ currentPosition?.x }}, {{ currentPosition?.y }})
+    </div>
+  </header>
+
+  <div
+    class="maze-grid"
+    [class.completed]="isComplete"
+    role="grid"
+    aria-label="Maze Grid">
+    <pre aria-hidden="true">{{ renderMaze() }}</pre>
+    <!-- Screen reader friendly description -->
+    <div class="sr-only">
+      Current position: {{ currentPosition?.x }}, {{ currentPosition?.y }}
+      {{ isComplete ? 'Maze completed!' : '' }}
+    </div>
+  </div>
+
+  <div
+    *ngIf="isComplete"
+    class="completion-message"
+    role="alert"
+    aria-live="polite">
+    🎉 Maze Completed! 🎉
+  </div>
+</section>
